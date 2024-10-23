@@ -9,6 +9,8 @@ import Link from "next/link";
 import GlobalFooter from "@/components/GlobalFooter";
 import './index.css'
 import {menus} from "../../../config/menu";
+import {useSelector} from "react-redux";
+import {RootState} from "@/stores";
 // 搜索条
 const SearchInput = () => {
     return (
@@ -45,6 +47,9 @@ interface Props{
 }
 export default function BasicLayout({children} : Props)  {
     const pathname = usePathname();
+    // 钩子 用于获取全局用户信息
+    const loginUser = useSelector((state : RootState) => state.loginUser);
+    // return 用于返回 html 代码
     return (
         <div
             id="basicLayout"
@@ -63,9 +68,9 @@ export default function BasicLayout({children} : Props)  {
                     pathname,
                 }}
                 avatarProps={{
-                    src: 'https://gw.alipayobjects.com/zos/antfincdn/efFD%24IOql2/weixintupian_20170331104822.jpg',
+                    src: loginUser.userAvatar || "/assert/id.jpg",
                     size: 'small',
-                    title: 'louis',
+                    title: loginUser.userName || "louis",
                     render: (props, dom) => {
                         return (
                             <Dropdown
