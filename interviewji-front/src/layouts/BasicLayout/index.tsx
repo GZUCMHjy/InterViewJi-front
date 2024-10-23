@@ -2,7 +2,7 @@
 import {GithubFilled, LogoutOutlined, SearchOutlined,} from '@ant-design/icons';
 import {ProLayout,} from '@ant-design/pro-components';
 import {Dropdown, Input,} from 'antd';
-import React from 'react';
+import React, {useState} from 'react';
 import Image from "next/image"
 import {usePathname} from "next/navigation";
 import Link from "next/link";
@@ -11,6 +11,10 @@ import './index.css'
 import {menus} from "../../../config/menu";
 import {useSelector} from "react-redux";
 import {RootState} from "@/stores";
+import getAccessibleMenus from "@/access/menuAccess";
+import MdEditor from "@/components/MdEditor";
+import MdViewer from "@/components/MdViewer";
+import {text} from "mdast-util-to-hast/lib/handlers/text";
 // 搜索条
 const SearchInput = () => {
     return (
@@ -42,13 +46,17 @@ const SearchInput = () => {
     );
 };
 
-interface Props{
+interface Props {
     children?: React.ReactNode;
 }
-export default function BasicLayout({children} : Props)  {
+
+export default function BasicLayout({children}: Props) {
     const pathname = usePathname();
     // 钩子 用于获取全局用户信息
-    const loginUser = useSelector((state : RootState) => state.loginUser);
+    const loginUser = useSelector((state: RootState) => state.loginUser);
+    const [text, setText] = useState<string>('');
+
+
     // return 用于返回 html 代码
     return (
         <div
@@ -78,7 +86,7 @@ export default function BasicLayout({children} : Props)  {
                                     items: [
                                         {
                                             key: 'logout',
-                                            icon: <LogoutOutlined />,
+                                            icon: <LogoutOutlined/>,
                                             label: '退出登录',
                                         },
                                     ],
@@ -92,12 +100,12 @@ export default function BasicLayout({children} : Props)  {
                 actionsRender={(props) => {
                     if (props.isMobile) return [];
                     return [
-                        <SearchInput key="search" />,
+                        <SearchInput key="search"/>,
                         <a
-                             key="github"
-                             href="https://github.com/GZUCMHjy"
-                             target="_blank">
-                            <GithubFilled key="GithubFilled" />
+                            key="github"
+                            href="https://github.com/GZUCMHjy"
+                            target="_blank">
+                            <GithubFilled key="GithubFilled"/>
                         </a>
                     ];
                 }}
@@ -108,9 +116,9 @@ export default function BasicLayout({children} : Props)  {
                             {title}
                         </a>
                     );
-                    if (document.body.clientWidth < 1400) {
-                        return defaultDom;
-                    }
+                    // if (document.body.clientWidth < 1400) {
+                    //     return defaultDom;
+                    // }
                     if (_.isMobile) return defaultDom;
                     return (
                         <>
@@ -126,7 +134,7 @@ export default function BasicLayout({children} : Props)  {
                 onMenuHeaderClick={(e) => console.log(e)}
                 // 菜单数据钩子,定义有哪些菜单
                 menuDataRender={() => {
-                    return menus;
+                    return getAccessibleMenus(loginUser, menus);
                 }}
                 // 定义子菜单项如何渲染
                 menuItemRender={(item, dom) => (
@@ -138,6 +146,8 @@ export default function BasicLayout({children} : Props)  {
                     </Link>
                 )}
             >
+                <MdEditor value={text} onChange={setText} />
+                <MdViewer value={text} />
                 {children}
             </ProLayout>
         </div>
