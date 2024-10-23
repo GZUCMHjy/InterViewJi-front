@@ -1,0 +1,9 @@
+/*专门对底部栏的css文件样式*/
+.global-footer{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: #efefef;
+    padding: 16px;
+    text-align: center;
+}
