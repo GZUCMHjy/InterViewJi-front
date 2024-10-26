@@ -30,12 +30,13 @@ const InitLayout: React.FC<
         const res = await getLoginUserUsingGet();
         if (res.data) {
             // 更新用户信息
+            dispatch(setLoginUser(res.data));
         } else {
-            setTimeout(() => {
-                const testUser = {userName: "测试登录", id: 1, userAvatar: "https://www.code-nav.cn/logo.png",
-                userRole: ACCESS_ENUM.ADMIN}
-                dispatch(setLoginUser(testUser))
-            }, 3000)
+            // setTimeout(() => {
+            //     const testUser = {userName: "测试登录", id: 1, userAvatar: "https://www.code-nav.cn/logo.png",
+            //     userRole: ACCESS_ENUM.ADMIN}
+            //     dispatch(setLoginUser(testUser))
+            // }, 3000)
         }
     }, []);
     // 只执行一次
@@ -55,9 +56,11 @@ export default function RootLayout({
         <AntdRegistry>
             <Provider store={store}>
                 <InitLayout>
-                    <AccessLayout>
-                        <BasicLayout>{children}</BasicLayout>
-                    </AccessLayout>
+                    <BasicLayout>
+                        <AccessLayout>
+                            {children}
+                        </AccessLayout>
+                    </BasicLayout>
                 </InitLayout>
             </Provider>
         </AntdRegistry>

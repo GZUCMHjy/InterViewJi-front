@@ -1,20 +1,20 @@
 "use client"
 import {GithubFilled, LogoutOutlined, SearchOutlined,} from '@ant-design/icons';
 import {ProLayout,} from '@ant-design/pro-components';
-import {Dropdown, Input,} from 'antd';
+import {Dropdown, Input, message,} from 'antd';
 import React, {useState} from 'react';
 import Image from "next/image"
-import {usePathname} from "next/navigation";
+import {usePathname, useRouter} from "next/navigation";
 import Link from "next/link";
 import GlobalFooter from "@/components/GlobalFooter";
 import './index.css'
 import {menus} from "../../../config/menu";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "@/stores";
 import getAccessibleMenus from "@/access/menuAccess";
-import MdEditor from "@/components/MdEditor";
-import MdViewer from "@/components/MdViewer";
-import {text} from "mdast-util-to-hast/lib/handlers/text";
+import {userLogoutUsingPost} from "@/api/userController";
+import {setLoginUser} from "@/stores/loginUser";
+import DEFAULT_USER from "@/constants/user";
 // 搜索条
 const SearchInput = () => {
     return (
@@ -55,7 +55,22 @@ export default function BasicLayout({children}: Props) {
     // 钩子 用于获取全局用户信息
     const loginUser = useSelector((state: RootState) => state.loginUser);
     const [text, setText] = useState<string>('');
-
+    const router = useRouter();
+    const dispatch = useDispatch();
+    const doUserLogout = async () => {
+        const res = await userLogoutUsingPost();
+        try {
+            if (res.data) {
+                message.success("已退出登录");
+                // 保存用户状态
+                dispatch(setLoginUser(DEFAULT_USER));
+                // 重定向
+                router.push("/user/login");
+            }
+        } catch (e) {
+            message.error("退出失败" + e.message)
+        }
+    }
 
     // return 用于返回 html 代码
     return (
@@ -80,6 +95,12 @@ export default function BasicLayout({children}: Props) {
                     size: 'small',
                     title: loginUser.userName || "louis",
                     render: (props, dom) => {
+                        if (!loginUser.id) {
+                            // 如果未登录 直接返回空
+                            return <div onClick={() =>{
+                                router.push("/user/login");
+                            }}>{dom}</div>;
+                        }
                         return (
                             <Dropdown
                                 menu={{
@@ -90,6 +111,12 @@ export default function BasicLayout({children}: Props) {
                                             label: '退出登录',
                                         },
                                     ],
+                                    onClick: async (event: { key: React.Key }) => {
+                                        const {key} = event;
+                                        if (key === 'logout') {
+                                            doUserLogout();
+                                        }
+                                    }
                                 }}
                             >
                                 {dom}
@@ -146,8 +173,8 @@ export default function BasicLayout({children}: Props) {
                     </Link>
                 )}
             >
-                <MdEditor value={text} onChange={setText} />
-                <MdViewer value={text} />
+                {/*<MdEditor value={text} onChange={setText} />*/}
+                {/*<MdViewer value={text} />*/}
                 {children}
             </ProLayout>
         </div>

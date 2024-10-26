@@ -1,6 +1,5 @@
 // 用于检验用户是否有权限
 import ACCESS_ENUM from "@/access/accessEnum";
-import {log} from "node:util";
 // 当前用户有什么权限，以及当前访问的页面需要什么权限
 // 因此有两个参数
 /**
@@ -10,6 +9,7 @@ import {log} from "node:util";
  */
 const checkAccess = (loginUser:API.LoginUserVO,needAccess= ACCESS_ENUM.NOT_LOGIN) =>{
     const loginUserAccess = loginUser?.userRole ?? ACCESS_ENUM.NOT_LOGIN;
+    console.log("用户状态信息" + loginUser?.userRole);
     // 不需要登录，访客模式
     if (needAccess === ACCESS_ENUM.NOT_LOGIN){
         return true;

@@ -1,4 +1,3 @@
-"use client"
 import CreateModal from './components/CreateModal';
 import UpdateModal from './components/UpdateModal';
 import { deleteUserUsingPost, listUserByPageUsingPost } from '@/api/userController';
@@ -7,7 +6,6 @@ import type { ActionType, ProColumns } from '@ant-design/pro-components';
 import { PageContainer, ProTable } from '@ant-design/pro-components';
 import { Button, message, Space, Typography } from 'antd';
 import React, { useRef, useState } from 'react';
-// 管理员使用的页面 不需要做 SEO
 
 /**
  * 用户管理页面
@@ -113,86 +111,86 @@ const UserAdminPage: React.FC = () => {
       dataIndex: 'option',
       valueType: 'option',
       render: (_, record) => (
-          <Space size="middle">
-            <Typography.Link
-                onClick={() => {
-                  setCurrentRow(record);
-                  setUpdateModalVisible(true);
-                }}
-            >
-              修改
-            </Typography.Link>
-            <Typography.Link type="danger" onClick={() => handleDelete(record)}>
-              删除
-            </Typography.Link>
-          </Space>
+        <Space size="middle">
+          <Typography.Link
+            onClick={() => {
+              setCurrentRow(record);
+              setUpdateModalVisible(true);
+            }}
+          >
+            修改
+          </Typography.Link>
+          <Typography.Link type="danger" onClick={() => handleDelete(record)}>
+            删除
+          </Typography.Link>
+        </Space>
       ),
     },
   ];
   return (
-      <PageContainer>
-        <ProTable<API.User>
-            headerTitle={'查询表格'}
-            actionRef={actionRef}
-            rowKey="key"
-            search={{
-              labelWidth: 120,
+    <PageContainer>
+      <ProTable<API.User>
+        headerTitle={'查询表格'}
+        actionRef={actionRef}
+        rowKey="key"
+        search={{
+          labelWidth: 120,
+        }}
+        toolBarRender={() => [
+          <Button
+            type="primary"
+            key="primary"
+            onClick={() => {
+              setCreateModalVisible(true);
             }}
-            toolBarRender={() => [
-              <Button
-                  type="primary"
-                  key="primary"
-                  onClick={() => {
-                    setCreateModalVisible(true);
-                  }}
-              >
-                <PlusOutlined /> 新建
-              </Button>,
-            ]}
-            request={async (params, sort, filter) => {
-              const sortField = Object.keys(sort)?.[0];
-              const sortOrder = sort?.[sortField] ?? undefined;
+          >
+            <PlusOutlined /> 新建
+          </Button>,
+        ]}
+        request={async (params, sort, filter) => {
+          const sortField = Object.keys(sort)?.[0];
+          const sortOrder = sort?.[sortField] ?? undefined;
 
-              const { data, code } = await listUserByPageUsingPost({
-                ...params,
-                sortField,
-                sortOrder,
-                ...filter,
-              } as API.UserQueryRequest);
+          const { data, code } = await listUserByPageUsingPost({
+            ...params,
+            sortField,
+            sortOrder,
+            ...filter,
+          } as API.UserQueryRequest);
 
-              return {
-                success: code === 0,
-                data: data?.records || [],
-                total: Number(data?.total) || 0,
-              };
-            }}
-            columns={columns}
-        />
-        <CreateModal
-            visible={createModalVisible}
-            columns={columns}
-            onSubmit={() => {
-              setCreateModalVisible(false);
-              actionRef.current?.reload();
-            }}
-            onCancel={() => {
-              setCreateModalVisible(false);
-            }}
-        />
-        <UpdateModal
-            visible={updateModalVisible}
-            columns={columns}
-            oldData={currentRow}
-            onSubmit={() => {
-              setUpdateModalVisible(false);
-              setCurrentRow(undefined);
-              actionRef.current?.reload();
-            }}
-            onCancel={() => {
-              setUpdateModalVisible(false);
-            }}
-        />
-      </PageContainer>
+          return {
+            success: code === 0,
+            data: data?.records || [],
+            total: Number(data?.total) || 0,
+          };
+        }}
+        columns={columns}
+      />
+      <CreateModal
+        visible={createModalVisible}
+        columns={columns}
+        onSubmit={() => {
+          setCreateModalVisible(false);
+          actionRef.current?.reload();
+        }}
+        onCancel={() => {
+          setCreateModalVisible(false);
+        }}
+      />
+      <UpdateModal
+        visible={updateModalVisible}
+        columns={columns}
+        oldData={currentRow}
+        onSubmit={() => {
+          setUpdateModalVisible(false);
+          setCurrentRow(undefined);
+          actionRef.current?.reload();
+        }}
+        onCancel={() => {
+          setUpdateModalVisible(false);
+        }}
+      />
+    </PageContainer>
   );
 };
 export default UserAdminPage;
