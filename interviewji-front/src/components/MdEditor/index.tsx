@@ -4,6 +4,7 @@ import highlight from "@bytemd/plugin-highlight";
 import "bytemd/dist/index.css";
 import "highlight.js/styles/vs.css";
 import "./index.css";
+import 'github-markdown-css/github-markdown-light.css';
 // 接口参数
 interface Props {
     value?: string;
