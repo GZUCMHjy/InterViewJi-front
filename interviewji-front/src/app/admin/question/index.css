@@ -1,0 +1,9 @@
+#questionPage{
+        .ant-pro-card .ant-pro-card-body {
+                display: block;
+                box-sizing: border-box;
+                height: 20%;
+                padding-inline: 24px;
+                padding-block: 16px;
+        }
+}
