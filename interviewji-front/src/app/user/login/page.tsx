@@ -3,12 +3,13 @@ import {LockOutlined, UserOutlined,} from '@ant-design/icons';
 import {LoginForm, ProFormText,} from '@ant-design/pro-components';
 import Image from "next/image";
 import Link from "next/link";
-import {userLoginUsingPost, userRegisterUsingPost} from "@/api/userController";
+import {userLoginUsingPost} from "@/api/userController";
 import {message} from "antd";
 import {ProForm} from "@ant-design/pro-form/lib"
 import {useRouter} from "next/navigation";
 import {useDispatch} from "react-redux";
 import {setLoginUser} from "@/stores/loginUser";
+import {AppDispatch} from "@/stores";
 
 /**
  * 用户登录页面
@@ -18,12 +19,13 @@ const UserLoginPage: React.FC = () => {
     // 获取表单实例
     const [form] = ProForm.useForm();
     const router = useRouter();
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<AppDispatch>();
     const doSubmit = async (values: API.UserLoginRequest) => {
         const res = await userLoginUsingPost(values);
         try {
             if (res.data) {
                 message.success("登录成功");
+                console.log(res.data)
                 // 保存用户状态
                 dispatch(setLoginUser(res.data));
                 // 跳转主页

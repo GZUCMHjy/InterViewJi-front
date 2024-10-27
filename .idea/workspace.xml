@@ -5,7 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="daf5a9d1-389f-4dfa-b76c-f44ff28c40cc" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/interviewji-front/src/app/user/center/components/CalendarChart/index.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/interviewji-front/src/app/user/center/components/CalendarChart/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/interviewji-front/src/app/user/center/index.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/interviewji-front/src/app/user/center/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/interviewji-front/src/hooks/useAddUserSignInRecord.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interviewji-front/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/interviewji-front/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interviewji-front/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/interviewji-front/pnpm-lock.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interviewji-front/src/access/AccessLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/interviewji-front/src/access/AccessLayout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interviewji-front/src/access/checkAccess.ts" beforeDir="false" afterPath="$PROJECT_DIR$/interviewji-front/src/access/checkAccess.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interviewji-front/src/api/questionController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/interviewji-front/src/api/questionController.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interviewji-front/src/api/typings.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/interviewji-front/src/api/typings.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interviewji-front/src/api/userController.ts" beforeDir="false" afterPath="$PROJECT_DIR$/interviewji-front/src/api/userController.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interviewji-front/src/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/interviewji-front/src/app/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interviewji-front/src/app/question/[questionId]/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/interviewji-front/src/app/question/[questionId]/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interviewji-front/src/app/user/login/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/interviewji-front/src/app/user/login/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interviewji-front/src/components/QuestionCard/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/interviewji-front/src/components/QuestionCard/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interviewji-front/src/components/QuestionTable/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/interviewji-front/src/components/QuestionTable/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interviewji-front/src/layouts/BasicLayout/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/interviewji-front/src/layouts/BasicLayout/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interviewji-front/src/stores/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/interviewji-front/src/stores/index.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,21 +42,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "F:/LouisProject/interviewji-front/interviewji-front",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "npm.build.executor": "Run",
-    "npm.dev.executor": "Run",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;F:/LouisProject/interviewji-front/interviewji-front&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;npm.build.executor&quot;: &quot;Run&quot;,
+    &quot;npm.dev.executor&quot;: &quot;Run&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="npm.dev">
     <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
@@ -85,6 +104,9 @@
       <workItem from="1729587577581" duration="72000" />
       <workItem from="1729587658465" duration="14000" />
       <workItem from="1729587674051" duration="562000" />
+      <workItem from="1730009275154" duration="2000" />
+      <workItem from="1730009326702" duration="11000" />
+      <workItem from="1730009577978" duration="7000" />
     </task>
     <servers />
   </component>

@@ -9,7 +9,6 @@ import ACCESS_ENUM from "@/access/accessEnum";
  */
 const checkAccess = (loginUser:API.LoginUserVO,needAccess= ACCESS_ENUM.NOT_LOGIN) =>{
     const loginUserAccess = loginUser?.userRole ?? ACCESS_ENUM.NOT_LOGIN;
-    console.log("用户状态信息" + loginUser?.userRole);
     // 不需要登录，访客模式
     if (needAccess === ACCESS_ENUM.NOT_LOGIN){
         return true;

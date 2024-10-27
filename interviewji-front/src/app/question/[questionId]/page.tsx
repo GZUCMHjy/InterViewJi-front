@@ -2,7 +2,7 @@
 import './index.css'
 import {Flex, Menu} from "antd";
 import {getQuestionBankVoByIdUsingGet} from "@/api/questionBankController";
-import {getQuestionVoByIdUsingGet} from "@/api/questionController";
+import {getQuestionVoByIdUsingGet, searchQuestionVoByPageUsingPost} from "@/api/questionController";
 import Sider from "antd/es/layout/Sider";
 import Title from "antd/es/typography/Title";
 import {Content} from "antd/es/layout/layout";
@@ -14,12 +14,15 @@ import Link from "next/link";
  * @constructor
  */
 export default async function QuestionPage({params}) {
-    const {questionId} = params;
+    const {q: searchText} = params;
     let question = undefined;
     try {
-        const res = await getQuestionVoByIdUsingGet({
-            id: questionId,
-        })
+        const res = await searchQuestionVoByPageUsingPost({
+            searchText,
+            pageSize: 12,
+            sortField: "_score",
+            sortOrder: "descend",
+        });
         question = res.data;
     } catch (e) {
         console.error('获取题目详情失败，' + e.message);

@@ -21,10 +21,7 @@ const AccessLayout: React.FC<
     const loginUser = useSelector((state:RootState) => state.loginUser);
     const menu = findAllMenuItemByPath(pathname) || {};
     const needAccess = menu?.access ?? ACCESS_ENUM.NOT_LOGIN;
-    console.log("" + loginUser)
-    console.log("需要的权限" +needAccess)
     const canAccess = checkAccess(loginUser,needAccess);
-    console.log(canAccess)
     if(!canAccess){
         return <Forbidden/>
     }

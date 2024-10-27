@@ -1,5 +1,5 @@
 "use client"
-import {listQuestionByPageUsingPost} from '@/api/questionController';
+import {searchQuestionVoByPageUsingPost} from '@/api/questionController';
 import type {ActionType, ProColumns} from '@ant-design/pro-components';
 import {ProTable} from '@ant-design/pro-components';
 import React, {useRef, useState} from 'react';
@@ -10,6 +10,7 @@ import Link from "next/link";
 // 组件需要属性
 interface Props {
     // 默认值，用于展示服务端渲染的数据
+    searchText?: string;
     defaultQuestionList?: API.QuestionVO[];
     defaultTotal?: number;
     defaultSearchParams?: API.QuestionQueryRequest;
@@ -30,6 +31,12 @@ const QuestionTable: React.FC = (props: Props) => {
         defaultTotal || 0);
     // 用于是否是第一次请求
     const [init, setInit] = useState<boolean>(true)
+    // const res = await searchQuestionVoByPageUsingPost({
+    //     pageSize: 12,
+    //     sortField: "createTime",
+    //     sortOrder: "descend",
+    // });
+
     /**
      * 表格列配置
      */
@@ -41,6 +48,12 @@ const QuestionTable: React.FC = (props: Props) => {
             render: (_, record: API.QuestionVO) => {
                 return <Link href={`/question/${record.id}`}>{record.title}</Link>
             }
+        },
+        {
+            title: "搜索",
+            dataIndex: "searchText",
+            valueType: "text",
+            hideInTable: true,
         },
         {
             title: "标签",
@@ -87,9 +100,9 @@ const QuestionTable: React.FC = (props: Props) => {
                     const sortField = Object.keys(sort)?.[0] || 'createTime';
                     const sortOrder = sort?.[sortField] ?? 'descend';
 
-                    const {data, code} = await listQuestionByPageUsingPost({
+                    const {data, code} = await searchQuestionVoByPageUsingPost({
                         ...params,
-                        sortField,
+                        sortField: '_score',
                         sortOrder,
                         ...filter,
                     } as API.QuestionQueryRequest);

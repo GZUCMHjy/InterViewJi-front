@@ -5,11 +5,9 @@ import React, {useCallback, useEffect} from "react";
 import BasicLayout from "@/layouts/BasicLayout";
 import store, {AppDispatch} from "@/stores";
 import {Provider, useDispatch} from 'react-redux'
-import {init} from "next/dist/server/typescript/utils";
 import {getLoginUserUsingGet} from "@/api/userController";
 import {setLoginUser} from "@/stores/loginUser";
 import AccessLayout from "@/access/AccessLayout";
-import ACCESS_ENUM from "@/access/accessEnum";
 
 /**
  * 全局初始化逻辑

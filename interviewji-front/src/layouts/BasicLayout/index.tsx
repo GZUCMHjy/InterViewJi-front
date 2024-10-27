@@ -1,5 +1,5 @@
 "use client"
-import {GithubFilled, LogoutOutlined, SearchOutlined,} from '@ant-design/icons';
+import {GithubFilled, LogoutOutlined, SearchOutlined, UserOutlined,} from '@ant-design/icons';
 import {ProLayout,} from '@ant-design/pro-components';
 import {Dropdown, Input, message,} from 'antd';
 import React, {useState} from 'react';
@@ -63,7 +63,7 @@ export default function BasicLayout({children}: Props) {
                 avatarProps={{
                     src: loginUser.userAvatar || "/assert/id.jpg",
                     size: 'small',
-                    title: loginUser.userName || "louis",
+                    title: loginUser.userName || "louis2",
                     render: (props, dom) => {
                         if (!loginUser.id) {
                             // 如果未登录 直接返回空
@@ -76,6 +76,11 @@ export default function BasicLayout({children}: Props) {
                                 menu={{
                                     items: [
                                         {
+                                            key: 'userCenter',
+                                            icon: <UserOutlined/>,
+                                            label: '个人中心',
+                                        },
+                                        {
                                             key: 'logout',
                                             icon: <LogoutOutlined/>,
                                             label: '退出登录',
@@ -85,6 +90,8 @@ export default function BasicLayout({children}: Props) {
                                         const {key} = event;
                                         if (key === 'logout') {
                                             doUserLogout();
+                                        }else if(key === 'userCenter'){
+                                            router.push("/user/center");
                                         }
                                     }
                                 }}
