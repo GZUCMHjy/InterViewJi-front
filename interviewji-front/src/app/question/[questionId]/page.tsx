@@ -33,4 +33,4 @@ export default async function QuestionPage({params}) {
     return <div id="questionPage">
         <QuestionCard question={question}/>
     </div>
-}
+}   
