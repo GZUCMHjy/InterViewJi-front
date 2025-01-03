@@ -86,9 +86,6 @@ const QuestionTable: React.FC = (props: Props) => {
                 form={{
                     initialValues: defaultSearchParam,
                 }}
-                pagination={{
-                    pageSize: 6, // 设置每页显示6条记录
-                }}
                 dataSource={questionList}
                 request={async (params, sort, filter) => {
                     if (init) {
